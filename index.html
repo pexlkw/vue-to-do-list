@@ -6,6 +6,11 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<style>
+		.disabled {
+			color: red;
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
@@ -13,11 +18,11 @@
 		<input type="button" v-on:click="addItem" value="ADD" />
 
 		<ul>
-			<li v-for="todo in todoList">
-				<p>{{ todo.value }}</p>
-				<input type="checkbox" v-if="todo.status" v-model="todo.status" v-on:click="changeStatus" checked/>
-				<input type="checkbox" v-if="!todo.status" v-model="todo.status" v-on:click="changeStatus" />
-				<button>DELETE</button>
+			<li v-for="(todo, key) in todoList">
+				<p v-bind:class="{ disabled: todo.status }">{{ todo.value }}</p>
+				<input type="checkbox" v-if="todo.status" v-model="todo.status"  checked/>
+				<input type="checkbox" v-if="!todo.status" v-model="todo.status" />
+				<input type="button" value="DELETE" v-on:click="deleteItem(key)" />
 			</li>
 		</ul>
 	</div>
@@ -27,7 +32,7 @@
 			el: '#app',
 			data: {
 				todoList: [
-					{ 
+					{
 						value: 'example2',
 						status: false
 					},
@@ -35,7 +40,7 @@
 						value: 'example3',
 						status: true
 					},
-					{ 
+					{
 						value: 'example4',
 						status: true
 					},
@@ -49,8 +54,10 @@
 						status: false
 					});
 				},
-				changeStatus: function () {
-					console.log(this.todoList);
+				deleteItem: function(deleteKey) {
+					this.todoList = this.todoList.filter(function(value, key) {
+						return deleteKey !== key;
+					});
 				}
 			}
 		})
