@@ -9,8 +9,9 @@
 </head>
 <body>
 	<div id="app">
-		<input type="text" value="" id="add-input"/>
+		<input type="text" v-model="message">
 		<input type="button" v-on:click="reverseMessage" value="ADD" />
+
 		<ul>
 				<li v-for="todo in todoList">
 						<p>{{ todo.value }}</p>
@@ -42,11 +43,13 @@
 						value: 'example4',
 						status: true
 					},
-			  ]
+			  ],
+				message :'123',
 			},
 			methods: {
 				reverseMessage: function () {
-					console.log(this.todoList);
+					// this.message = this.message.push();
+					console.log(this.message);
 				}
 			}
 		})
