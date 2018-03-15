@@ -10,11 +10,11 @@
 <body>
 	<div id="app">
 		<input type="text" value="" id="add-input"/>
-		<input type="button" value="ADD" />
+		<input type="button" v-on:click="reverseMessage" value="ADD" />
 		<ul>
 				<li v-for="todo in todoList">
 						<p>{{ todo.value }}</p>
-						<input type="checkbox" v-if="todo.list" checked/>
+						<input type="checkbox" v-if="todo.status" checked/>
 						<button>DELETE</button>
 					</li>
 			<!-- <li>
@@ -43,6 +43,11 @@
 						status: true
 					},
 			  ]
+			},
+			methods: {
+				reverseMessage: function () {
+					console.log(this.todoList);
+				}
 			}
 		})
 	</script>
