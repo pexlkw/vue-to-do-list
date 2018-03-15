@@ -9,18 +9,35 @@
 </head>
 <body>
 	<div id="app">
-		<input type="text" value="" />
+		<input type="text" value="" id="add-input"/>
 		<input type="button" value="ADD" />
-		{{ message[0] }}
 	</div>
 
 	<script>
+		var default = [
+					{ 
+						value: '',
+						status: true
+					}
+		];
+
 		var app = new Vue({
 			el: '#app',
 			data: {
-				message: ['Hello Vue!']
+				todoList: default,
 			}
 		})
+
+		var addButton = new Vue({
+			el: 'add-input',
+			date : {
+				see : true
+			}
+		})
+
+		console.log('------------------------------------');
+		console.log(addButton.see);
+		console.log('------------------------------------');
 	</script>
 </body>
 </html>
