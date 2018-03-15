@@ -9,20 +9,16 @@
 </head>
 <body>
 	<div id="app">
-		<input type="text" v-model="message">
-		<input type="button" v-on:click="reverseMessage" value="ADD" />
+		<input type="text" v-model="todoItem" />
+		<input type="button" v-on:click="addItem" value="ADD" />
 
 		<ul>
-				<li v-for="todo in todoList">
-						<p>{{ todo.value }}</p>
-						<input type="checkbox" v-if="todo.status" checked/>
-						<button>DELETE</button>
-					</li>
-			<!-- <li>
-				<p>Example</p>
-				<input type="checkbox" />
+			<li v-for="todo in todoList">
+				<p>{{ todo.value }}</p>
+				<input type="checkbox" v-if="todo.status" v-model="todo.status" v-on:click="changeStatus" checked/>
+				<input type="checkbox" v-if="!todo.status" v-model="todo.status" v-on:click="changeStatus" />
 				<button>DELETE</button>
-			</li> -->
+			</li>
 		</ul>
 	</div>
 
@@ -44,12 +40,17 @@
 						status: true
 					},
 			  ],
-				message :'123',
+				todoItem : '',
 			},
 			methods: {
-				reverseMessage: function () {
-					// this.message = this.message.push();
-					console.log(this.message);
+				addItem: function () {
+					this.todoList.push({
+						value: this.todoItem,
+						status: false
+					});
+				},
+				changeStatus: function () {
+					console.log(this.todoList);
 				}
 			}
 		})
