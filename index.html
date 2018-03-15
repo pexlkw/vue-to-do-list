@@ -12,11 +12,16 @@
 		<input type="text" value="" id="add-input"/>
 		<input type="button" value="ADD" />
 		<ul>
-			<li>
+				<li v-for="todo in todoList">
+						<p>{{ todo.value }}</p>
+						<input type="checkbox" v-if="todo.list" checked/>
+						<button>DELETE</button>
+					</li>
+			<!-- <li>
 				<p>Example</p>
 				<input type="checkbox" />
 				<button>DELETE</button>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 
@@ -26,9 +31,17 @@
 			data: {
 				todoList: [
 					{ 
-						value: '',
+						value: 'example2',
+						status: false
+					},
+					{ 
+						value: 'example3',
 						status: true
-					}
+					},
+					{ 
+						value: 'example4',
+						status: true
+					},
 			  ]
 			}
 		})
