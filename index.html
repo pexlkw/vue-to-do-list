@@ -11,33 +11,27 @@
 	<div id="app">
 		<input type="text" value="" id="add-input"/>
 		<input type="button" value="ADD" />
+		<ul>
+			<li>
+				<p>Example</p>
+				<input type="checkbox" />
+				<button>DELETE</button>
+			</li>
+		</ul>
 	</div>
 
 	<script>
-		var default = [
+		var app = new Vue({
+			el: '#app',
+			data: {
+				todoList: [
 					{ 
 						value: '',
 						status: true
 					}
-		];
-
-		var app = new Vue({
-			el: '#app',
-			data: {
-				todoList: default,
+			  ]
 			}
 		})
-
-		var addButton = new Vue({
-			el: 'add-input',
-			date : {
-				see : true
-			}
-		})
-
-		console.log('------------------------------------');
-		console.log(addButton.see);
-		console.log('------------------------------------');
 	</script>
 </body>
 </html>
