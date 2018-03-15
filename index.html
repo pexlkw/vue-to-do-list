@@ -9,14 +9,16 @@
 </head>
 <body>
 	<div id="app">
-		{{ message }}
-	</div>	
+		<input type="text" value="" />
+		<input type="button" value="ADD" />
+		{{ message[0] }}
+	</div>
 
 	<script>
 		var app = new Vue({
 			el: '#app',
 			data: {
-				message: 'Hello Vue!'
+				message: ['Hello Vue!']
 			}
 		})
 	</script>
