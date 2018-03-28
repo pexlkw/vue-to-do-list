@@ -44,10 +44,11 @@
 			mounted: function() {
 				var _this = this; // function內的this指向不同
 
-				this.$http.get('/list.json')
-  			.then(function (respones) {
+				this.$http.get('/list.json').then(function (respones) {
 					_this.todoList = respones.data;
-  			});
+  			}).catch(function (error) {
+					console.log(error);
+				});
 			},
 		})
 
