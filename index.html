@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<style>
 		.disabled {
 			color: red;
@@ -14,53 +13,44 @@
 </head>
 <body>
 	<div id="app">
-		<input type="text" v-model="todoItem" />
-		<input type="button" v-on:click="addItem" value="ADD" />
-
+		<input type="text" />
+		<input type="button" value="ADD" />
 		<ul>
-			<li v-for="(todo, key) in todoList">
-				<p v-bind:class="{ disabled: todo.status }">{{ todo.value }}</p>
+			<li v-for="todo in todoList" >
+				<input type="checkbox" :checked=todo.static>
+				<span v-text =todo.item></span>
+				<span><button>delete</button></span>
+			</li>
+		</ul>
+		<!-- <ul>
+			<li v-for="todo in todoList" v-text="todo">
+				<p v-bind:class="{ disabled: todo.status }">@{{ todo.value }}</p>
 				<input type="checkbox" v-if="todo.status" v-model="todo.status"  checked/>
 				<input type="checkbox" v-if="!todo.status" v-model="todo.status" />
 				<input type="button" value="DELETE" v-on:click="deleteItem(key)" />
 			</li>
-		</ul>
+		</ul> -->
 	</div>
-
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
+		Vue.prototype.$http = axios;
+
 		var app = new Vue({
 			el: '#app',
 			data: {
-				todoList: [
-					{
-						value: 'example2',
-						status: false
-					},
-					{ 
-						value: 'example3',
-						status: true
-					},
-					{
-						value: 'example4',
-						status: true
-					},
-			  ],
-				todoItem : '',
+				todoList: [],
 			},
-			methods: {
-				addItem: function () {
-					this.todoList.push({
-						value: this.todoItem,
-						status: false
-					});
-				},
-				deleteItem: function(deleteKey) {
-					this.todoList = this.todoList.filter(function(value, key) {
-						return deleteKey !== key;
-					});
-				}
-			}
+			mounted: function() {
+				var _this = this; // function內的this指向不同
+
+				this.$http.get('/list.json')
+  			.then(function (respones) {
+					_this.todoList = respones.data;
+  			});
+			},
 		})
+
 	</script>
 </body>
 </html>
