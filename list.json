@@ -1,0 +1,14 @@
+[
+	{
+		"item": "first todo",
+		"static": false
+	},
+	{
+		"item": "todo list 2",
+		"static": false
+	},
+	{
+		"item": "todo list 3",
+		"static": true
+	}
+]
